@@ -2,7 +2,7 @@ import React from "react";
 
 function ToDo(props) {
 
-    const {todo, index, deleteTodo} = props;
+    const {todo, index, deleteTodo, editTodo, id} = props;
     
         return (
             <>
@@ -10,7 +10,7 @@ function ToDo(props) {
                     <th scope="row">{index}</th>
                     <td>{todo.name}</td>
                     <td>
-                        <button className="btn btn-info">
+                        <button className="btn btn-info" onClick={() => editTodo(id)}>
                             <i class="far fa-edit"></i>
                         </button>
                     </td>

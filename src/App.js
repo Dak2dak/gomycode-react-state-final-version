@@ -12,10 +12,10 @@ class App extends React.Component {
 
     this.state = {
       todos : [
-          {name: "Python class"},
-          {name: "English class"},
-          {name: "JavaScript class"},
-          {name: "Math class"}
+          {id: 1, name: "Python class", show: false},
+          {id: 2, name: "English class", show: false},
+          {id: 3, name: "JavaScript class", show: false},
+          {id: 4, name: "Math class", show: false}
       ],
 
       todo: {
@@ -34,7 +34,7 @@ class App extends React.Component {
     this.setState({todo});
   }
 
-  onSubmit =(e) =>{
+  onSubmit = (e) =>{
     e.preventDefault();
     const {todos, todo} = this.state;
     const newTodos = [...todos, todo];
@@ -48,8 +48,25 @@ class App extends React.Component {
     this.setState({todos: newTodos})
   }
 
-  editTodo = () =>{
+  editTodo(id) {
+    const newTodos =  [...this.state.todos];
+    newTodos.forEach(todo => 
+            {if(todo.id === id) {
+              todo.show = !todo.show;
+        }})
+        
+        this.setState({ newTodos})
+    }
 
+  modifyTodo(id, name) {
+    const newTodos = [...this.state.todos];
+    newTodos.forEach(todo => {
+      if(todo.id === id){
+        todo.name = name;
+        todo.show = !todo.show;
+      }
+    })
+    this.setState({newTodos});
   }
 
   render() {
@@ -62,14 +79,14 @@ class App extends React.Component {
               onChange={this.onChange} />
             </div>
             <div>
-              <ToDoList todos={todos} deleteTodo={this.deleteTodo} 
-              onChange={this.onChange} />
+              <ToDoList todos={todos} onChange={this.onChange} 
+              editTodo= {this.editTodo} onSubmit={this.modifyTodo} 
+              deleteTodo={this.deleteTodo} />
             </div>
         </div>
       </div>
     );
   }
-
 }
 
 export default App;

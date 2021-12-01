@@ -4,7 +4,7 @@ import ToDo from './ToDo';
 
 const ToDoList = (props) => {
 
-    const {todos, deleteTodo} = props;
+    const {todos, deleteTodo, modifyTodo, markAsDone} = props;
     return (
 
         <table className="table">
@@ -19,7 +19,7 @@ const ToDoList = (props) => {
             </thead>
             <tbody>
                 {todos.map((todo, index) => <ToDo todo={todo} 
-                index={index} deleteTodo={deleteTodo} />)}
+                index={index} deleteTodo={deleteTodo} modifyTodo={modifyTodo} markAsDone={markAsDone} />)}
             </tbody>
         </table>
         
